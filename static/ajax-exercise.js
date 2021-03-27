@@ -3,27 +3,32 @@
 
 // PART 1: SHOW A FORTUNE
 
-function showFortune(evt) {
+function newFortune(result) {
+    $('#fortune-text').html(result)
+}
 
-    // TODO: get the fortune and show it in the #fortune-text div
+function showFortune(evt) {
+  $.get('/fortune', newFortune);
 }
 
 $('#get-fortune-button').on('click', showFortune);
 
 
-
-
-
 // PART 2: SHOW WEATHER
+
+function newWeather (result) {ç
+    $('#weather-info').html(result.forecast)
+}
 
 function showWeather(evt) {
     evt.preventDefault();
 
     let url = "/weather.json";
     let formData = {"zipcode": $("#zipcode-field").val()};
+    console.log(formData);
 
-
-    // TODO: request weather with that URL and show the forecast in #weather-info
+    $.get(url, formData, newWeather);
+    
 }
 
 $("#weather-form").on('submit', showWeather);
